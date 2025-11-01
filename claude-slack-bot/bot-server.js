@@ -10,7 +10,7 @@ import { App } from '@slack/bolt';
 import Anthropic from '@anthropic-ai/sdk';
 import express from 'express';
 import dotenv from 'dotenv';
-// import PhycAnalyzerMCP from './connect-phyc-analyzer.js';
+import PhycAnalyzerMCP from './connect-phyc-analyzer.js';
 
 // Load environment (Render provides env vars directly)
 dotenv.config();
@@ -27,9 +27,8 @@ const anthropic = new Anthropic({
   apiKey: ANTHROPIC_API_KEY
 });
 
-// Initialize Phyc Analyzer (disabled for initial deployment)
-// const phycAnalyzer = new PhycAnalyzerMCP();
-const phycAnalyzer = null;
+// Initialize Phyc Analyzer (Cloud version with direct API access)
+const phycAnalyzer = new PhycAnalyzerMCP();
 
 // Initialize Slack Bot
 const app = new App({
