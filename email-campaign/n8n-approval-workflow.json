@@ -1,0 +1,157 @@
+{
+  "name": "Instagram Approval Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "C09J5PYTACV",
+          "mode": "id"
+        },
+        "limit": 1
+      },
+      "id": "slack-poll",
+      "name": "Poll Slack Channel",
+      "type": "n8n-nodes-base.slackTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Check for white checkmark reaction on messages\nconst items = $input.all();\n\nconst approvedPosts = [];\n\nfor (const item of items) {\n  const reactions = item.json.reactions || [];\n  \n  // Look for white_check_mark reaction\n  const hasApproval = reactions.some(r => \n    r.name === 'white_check_mark' && r.count > 0\n  );\n  \n  if (hasApproval) {\n    // Extract post data from message metadata\n    const metadata = item.json.metadata;\n    \n    if (metadata && metadata.event_type === 'instagram_approval_request') {\n      approvedPosts.push({\n        json: {\n          ...metadata.event_payload,\n          messageTs: item.json.ts,\n          approved: true,\n          approvedAt: new Date().toISOString()\n        }\n      });\n    }\n  }\n}\n\nreturn approvedPosts;"
+      },
+      "id": "check-reactions",
+      "name": "Check for Approval",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://hooks.zapier.com/hooks/catch/23493233/urrpmdj/",
+        "options": {
+          "bodyParametersUi": {
+            "parameter": [
+              {
+                "name": "image_url",
+                "value": "={{$json.imageUrl}}"
+              },
+              {
+                "name": "caption",
+                "value": "={{$json.caption}}"
+              },
+              {
+                "name": "campaign",
+                "value": "={{$json.campaignName}}"
+              }
+            ]
+          }
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "method": "POST"
+      },
+      "id": "post-instagram",
+      "name": "Post to Instagram",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C08HE87MCP7",
+          "mode": "id"
+        },
+        "text": "=✅ Instagram Post Published!\n\nCampaign: {{$json.campaignName}}\nApproved and posted automatically.\n\n🔗 Check: https://instagram.com/legacywineandliquor"
+      },
+      "id": "notify-success",
+      "name": "Notify Success",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C09J5PYTACV",
+          "mode": "id"
+        },
+        "messageType": "update",
+        "ts": "={{$json.messageTs}}",
+        "text": "={{$json.text}}\n\n✅ *APPROVED & POSTED* at {{$json.approvedAt}}",
+        "otherOptions": {}
+      },
+      "id": "update-approval-message",
+      "name": "Update Approval Message",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [900, 480]
+    }
+  ],
+  "connections": {
+    "Poll Slack Channel": {
+      "main": [
+        [
+          {
+            "node": "Check for Approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check for Approval": {
+      "main": [
+        [
+          {
+            "node": "Post to Instagram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post to Instagram": {
+      "main": [
+        [
+          {
+            "node": "Notify Success",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Update Approval Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "timezone": "America/New_York"
+  },
+  "tags": [
+    {
+      "name": "Instagram",
+      "id": "instagram"
+    },
+    {
+      "name": "Approval",
+      "id": "approval"
+    }
+  ]
+}

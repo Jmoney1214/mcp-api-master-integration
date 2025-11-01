@@ -1,0 +1,173 @@
+{
+  "name": "Instagram Auto-Post - Legacy Wine",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "instagram-post",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "webhookId": "instagram-auto-post"
+    },
+    {
+      "parameters": {
+        "functionCode": "// Process Instagram post data\nconst data = items[0].json;\n\n// Generate caption with hashtags\nconst caption = data.caption || `🍷 ${data.title || 'Weekend Wine Special'}\n\n${data.description || 'Premium wines at unbeatable prices!'}\n\n📍 Legacy Wine & Liquor\n200 S French Ave, Sanford, FL\n📞 (407) 915-7812\n\n#WineLovers #LegacyWine #SanfordFL #WineSpecial #LocalBusiness #WineDeals #Cheers #WineTime #FloridaWine #ShopLocal`;\n\n// Prepare Zapier webhook payload\nreturn [{\n  json: {\n    imageUrl: data.imageUrl || data.image || 'https://images.pexels.com/photos/1123260/pexels-photo-1123260.jpeg',\n    caption: caption,\n    timestamp: new Date().toISOString(),\n    campaignName: data.campaignName || 'Auto Post',\n    storeInfo: {\n      name: 'Legacy Wine & Liquor',\n      address: '200 S French Ave, Sanford, FL 32771',\n      phone: '(407) 915-7812',\n      instagram: '@legacywineandliquor'\n    }\n  }\n}];"
+      },
+      "id": "process-data",
+      "name": "Process Post Data",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://hooks.zapier.com/hooks/catch/23493233/urrpmdj/",
+        "options": {
+          "bodyParametersUi": {
+            "parameter": [
+              {
+                "name": "image_url",
+                "value": "={{$json.imageUrl}}"
+              },
+              {
+                "name": "caption",
+                "value": "={{$json.caption}}"
+              },
+              {
+                "name": "campaign",
+                "value": "={{$json.campaignName}}"
+              }
+            ]
+          }
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "method": "POST"
+      },
+      "id": "zapier-webhook",
+      "name": "Post to Instagram (Zapier)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Check Zapier response\nconst response = items[0].json;\n\nreturn [{\n  json: {\n    success: true,\n    message: 'Instagram post published successfully',\n    imageUrl: response.imageUrl || $node[\"Process Post Data\"].json.imageUrl,\n    caption: $node[\"Process Post Data\"].json.caption.substring(0, 100) + '...',\n    timestamp: new Date().toISOString(),\n    zapierResponse: response\n  }\n}];"
+      },
+      "id": "format-response",
+      "name": "Format Response",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "channel": "#social",
+        "text": "=📸 **Instagram Post Published!**\n\n✅ Campaign: {{$json.campaignName}}\n📷 Image: {{$json.imageUrl}}\n📝 Caption: {{$json.caption.substring(0, 150)}}...\n\n🔗 Check: https://instagram.com/legacywineandliquor",
+        "otherOptions": {}
+      },
+      "id": "slack-notification",
+      "name": "Notify Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [900, 480],
+      "credentials": {
+        "slackApi": {
+          "id": "1",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.success}}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "check-success",
+      "name": "Check Success",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1120, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Process Post Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Post Data": {
+      "main": [
+        [
+          {
+            "node": "Post to Instagram (Zapier)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post to Instagram (Zapier)": {
+      "main": [
+        [
+          {
+            "node": "Format Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Response": {
+      "main": [
+        [
+          {
+            "node": "Check Success",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Notify Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "timezone": "America/New_York",
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all"
+  },
+  "tags": [
+    {
+      "name": "Instagram",
+      "id": "instagram"
+    },
+    {
+      "name": "Marketing",
+      "id": "marketing"
+    }
+  ]
+}

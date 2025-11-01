@@ -1,0 +1,68 @@
+{
+  "name": "mcp-api-master-integration",
+  "version": "1.0.0",
+  "description": "Master integration hub for 24 APIs and MCP servers with line-by-line implementation guides",
+  "main": "MASTER_CONTROL_DASHBOARD.js",
+  "type": "module",
+  "scripts": {
+    "start": "node MASTER_CONTROL_DASHBOARD.js",
+    "test-all": "node scripts/test-all-connections.js",
+    "daily-social": "node scripts/daily-social-workflow.js",
+    "monitor": "node scripts/monitor-apis.js",
+    "check-env": "node scripts/check-environment.js",
+    "logs": "tail -f logs/api.log",
+    "slack": "node 01-slack-integration/connect-slack.js",
+    "cloudflare": "node 02-cloudflare-mcp/connect-cloudflare.js",
+    "notion": "node 03-notion-mcp/connect-notion.js",
+    "render": "node 04-render-mcp/connect-render.js",
+    "openai": "node 05-openai-gpt4/connect-openai.js",
+    "instagram": "node 06-instagram-api/connect-instagram.js"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.14",
+    "@slack/events-api": "^3.0.1",
+    "@slack/interactive-messages": "^2.0.2",
+    "@slack/web-api": "^6.11.2",
+    "@google-cloud/aiplatform": "^3.10.0",
+    "anthropic": "^0.17.0",
+    "axios": "^1.6.7",
+    "chalk": "^5.3.0",
+    "cli-table3": "^0.6.3",
+    "dotenv": "^16.4.1",
+    "form-data": "^4.0.0",
+    "inquirer": "^9.2.14",
+    "node-cron": "^3.0.3",
+    "openai": "^4.28.0",
+    "ora": "^8.0.1",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.3",
+    "prettier": "^3.2.5"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "keywords": [
+    "mcp",
+    "api",
+    "integration",
+    "slack",
+    "cloudflare",
+    "notion",
+    "render",
+    "openai",
+    "instagram",
+    "automation",
+    "dashboard"
+  ],
+  "author": "Legacy Wine & Liquor",
+  "license": "Private",
+  "repository": {
+    "type": "git",
+    "url": "private"
+  }
+}

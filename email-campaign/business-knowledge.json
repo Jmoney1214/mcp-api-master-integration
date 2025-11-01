@@ -1,0 +1,283 @@
+{
+  "business": {
+    "name": "Legacy Wine & Liquor",
+    "location": {
+      "address": "200 S French Ave",
+      "city": "Sanford",
+      "state": "FL",
+      "zip": "32771",
+      "phone": "(407) 915-7812"
+    },
+    "hours": "Open Daily",
+    "instagram": "@legacywineandliquor",
+    "specialties": [
+      "Premium wine selection",
+      "Craft beer collection",
+      "Rare spirits",
+      "Local favorites",
+      "Competitive prices",
+      "Expert staff recommendations"
+    ],
+    "target_audience": [
+      "Wine enthusiasts",
+      "Craft beer lovers",
+      "Cocktail makers",
+      "Party planners",
+      "Gift shoppers",
+      "Local Sanford community"
+    ],
+    "brand_voice": "Friendly, knowledgeable, community-focused, premium but approachable"
+  },
+
+  "product_categories": {
+    "wine": {
+      "types": ["Red Wine", "White Wine", "Rosé", "Champagne", "Sparkling Wine", "Dessert Wine"],
+      "popular_regions": ["California", "France", "Italy", "Spain", "Argentina", "Australia"],
+      "price_tiers": ["Value (under $15)", "Premium ($15-$30)", "Reserve ($30-$50)", "Luxury ($50+)"],
+      "selling_points": ["Food pairing", "Wine scores", "Limited availability", "Award winners"]
+    },
+    "beer": {
+      "types": ["IPA", "Lager", "Stout", "Ale", "Pilsner", "Wheat Beer", "Sour Beer"],
+      "focus": ["Craft beer", "Local breweries", "Seasonal releases", "Limited editions"],
+      "occasions": ["Game day", "BBQ", "Beach", "Casual drinking"]
+    },
+    "spirits": {
+      "categories": ["Vodka", "Whiskey", "Bourbon", "Rum", "Tequila", "Gin", "Cognac", "Liqueurs"],
+      "attributes": ["Aged", "Small batch", "Premium", "Imported", "Rare"],
+      "uses": ["Cocktails", "Sipping", "Mixing", "Gifts"]
+    }
+  },
+
+  "holidays_and_events": {
+    "annual_holidays": [
+      {
+        "name": "New Year's Eve",
+        "date": "December 31",
+        "products": ["Champagne", "Sparkling Wine", "Party mixers"],
+        "themes": ["Celebration", "Toast to new beginnings", "Party essentials"]
+      },
+      {
+        "name": "Super Bowl",
+        "date": "Early February",
+        "products": ["Beer", "Wings pairings", "Party supplies"],
+        "themes": ["Game day", "Tailgating", "Team spirit"]
+      },
+      {
+        "name": "Valentine's Day",
+        "date": "February 14",
+        "products": ["Red wine", "Champagne", "Chocolate pairings"],
+        "themes": ["Romance", "Date night", "Gifts for couples"]
+      },
+      {
+        "name": "St. Patrick's Day",
+        "date": "March 17",
+        "products": ["Irish whiskey", "Beer", "Green cocktails"],
+        "themes": ["Irish celebration", "Festive drinks", "Party time"]
+      },
+      {
+        "name": "Easter",
+        "date": "Spring (varies)",
+        "products": ["Brunch wines", "Rosé", "Spring cocktails"],
+        "themes": ["Spring celebration", "Brunch", "Family gatherings"]
+      },
+      {
+        "name": "Cinco de Mayo",
+        "date": "May 5",
+        "products": ["Tequila", "Margarita supplies", "Mexican beer"],
+        "themes": ["Fiesta", "Margaritas", "Mexican celebration"]
+      },
+      {
+        "name": "Memorial Day",
+        "date": "Last Monday in May",
+        "products": ["Beer", "BBQ wines", "Summer cocktails"],
+        "themes": ["BBQ season", "Summer kickoff", "Outdoor entertaining"]
+      },
+      {
+        "name": "Father's Day",
+        "date": "Third Sunday in June",
+        "products": ["Whiskey", "Craft beer", "Premium spirits"],
+        "themes": ["Dad's favorites", "Gift ideas", "Special treats"]
+      },
+      {
+        "name": "4th of July",
+        "date": "July 4",
+        "products": ["Beer", "American wines", "Red/white/blue cocktails"],
+        "themes": ["Independence Day", "Patriotic", "BBQ and fireworks"]
+      },
+      {
+        "name": "Labor Day",
+        "date": "First Monday in September",
+        "products": ["Beer", "BBQ wines", "Summer closeout"],
+        "themes": ["Last summer BBQ", "End of summer", "Outdoor fun"]
+      },
+      {
+        "name": "Oktoberfest",
+        "date": "Late September - Early October",
+        "products": ["German beer", "Lagers", "Fall beers"],
+        "themes": ["German celebration", "Beer fest", "Fall traditions"]
+      },
+      {
+        "name": "Halloween",
+        "date": "October 31",
+        "products": ["Pumpkin beers", "Dark wines", "Spooky cocktails"],
+        "themes": ["Costume parties", "Spooky drinks", "Fall flavors"]
+      },
+      {
+        "name": "Thanksgiving",
+        "date": "Fourth Thursday in November",
+        "products": ["Fall wines", "Bourbon", "Dinner pairings"],
+        "themes": ["Family feast", "Wine pairings", "Gratitude"]
+      },
+      {
+        "name": "Black Friday",
+        "date": "Day after Thanksgiving",
+        "products": ["Doorbuster deals", "Gift sets", "Party supplies"],
+        "themes": ["Holiday shopping", "Best deals", "Stock up"]
+      },
+      {
+        "name": "Christmas",
+        "date": "December 25",
+        "products": ["Gift wines", "Champagne", "Holiday spirits", "Party bundles"],
+        "themes": ["Holiday cheer", "Gift giving", "Festive celebrations"]
+      }
+    ],
+
+    "recurring_themes": [
+      {
+        "name": "Weekend Specials",
+        "frequency": "Every Friday-Sunday",
+        "angle": "Weekend deals and party essentials"
+      },
+      {
+        "name": "Wine Wednesday",
+        "frequency": "Every Wednesday",
+        "angle": "Midweek wine features and education"
+      },
+      {
+        "name": "Thirsty Thursday",
+        "frequency": "Every Thursday",
+        "angle": "Cocktail recipes and spirit highlights"
+      },
+      {
+        "name": "New Arrival Friday",
+        "frequency": "Weekly",
+        "angle": "Showcase new products each Friday"
+      },
+      {
+        "name": "Monday Motivation",
+        "frequency": "Every Monday",
+        "angle": "Start the week with something special"
+      }
+    ],
+
+    "seasonal_themes": {
+      "spring": ["Rosé season", "Outdoor entertaining", "Brunch wines", "Spring cocktails"],
+      "summer": ["Beach drinks", "Pool party", "BBQ wines", "Light and refreshing"],
+      "fall": ["Harvest wines", "Oktoberfest", "Bourbon season", "Cozy drinks"],
+      "winter": ["Holiday spirits", "Warming cocktails", "Celebration wines", "Gift season"]
+    }
+  },
+
+  "content_strategies": {
+    "post_types": [
+      {
+        "type": "Product Spotlight",
+        "description": "Highlight a specific product with tasting notes and pairing suggestions",
+        "frequency": "2-3x per week"
+      },
+      {
+        "type": "Educational",
+        "description": "Teach about wine regions, spirit production, beer styles, etc.",
+        "frequency": "1x per week"
+      },
+      {
+        "type": "Promotional",
+        "description": "Sales, discounts, special offers",
+        "frequency": "2-3x per week"
+      },
+      {
+        "type": "Recipe/Cocktail",
+        "description": "Drink recipes using products we carry",
+        "frequency": "1x per week"
+      },
+      {
+        "type": "Community",
+        "description": "Local events, customer spotlights, store updates",
+        "frequency": "1x per week"
+      },
+      {
+        "type": "Holiday/Event",
+        "description": "Tie into holidays and events",
+        "frequency": "As relevant"
+      }
+    ],
+
+    "best_practices": [
+      "Use high-quality product photos when available",
+      "Include price points for promotional posts",
+      "Always add store location and hours",
+      "Use relevant hashtags (8-12 per post)",
+      "Tag brands when featuring their products",
+      "Post during peak times: 11am-1pm, 5pm-7pm",
+      "Engage with comments within 1 hour",
+      "Cross-promote with stories",
+      "Use Instagram Shopping when possible"
+    ],
+
+    "hashtag_strategy": {
+      "always_use": [
+        "#LegacyWine",
+        "#LegacyWineAndLiquor",
+        "#SanfordFL",
+        "#SanfordFlorida"
+      ],
+      "wine_specific": [
+        "#Wine",
+        "#WineLovers",
+        "#WineTime",
+        "#WineOClock",
+        "#Vino",
+        "#WineTasting",
+        "#FloridaWine"
+      ],
+      "beer_specific": [
+        "#CraftBeer",
+        "#Beer",
+        "#BeerLovers",
+        "#IPA",
+        "#FloridaBeer",
+        "#LocalBeer"
+      ],
+      "spirits_specific": [
+        "#Whiskey",
+        "#Cocktails",
+        "#Mixology",
+        "#Spirits",
+        "#CraftCocktails",
+        "#BourbonLovers"
+      ],
+      "local": [
+        "#CentralFlorida",
+        "#OrlandoEats",
+        "#SeminoleCounty",
+        "#VisitFlorida",
+        "#SupportLocal"
+      ]
+    }
+  },
+
+  "inventory_tracking": {
+    "new_arrivals": [],
+    "limited_editions": [],
+    "best_sellers": [],
+    "sale_items": [],
+    "out_of_stock": []
+  },
+
+  "learning": {
+    "successful_posts": [],
+    "engagement_patterns": {},
+    "customer_feedback": [],
+    "competitor_insights": []
+  }
+}

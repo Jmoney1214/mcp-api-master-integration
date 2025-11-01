@@ -1,0 +1,36 @@
+{
+  "name": "claude-24-7-slack-bot",
+  "version": "1.0.0",
+  "description": "Always-on Claude assistant via Slack, deployed on Render",
+  "main": "bot-server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node bot-server.js",
+    "dev": "nodemon bot-server.js",
+    "test": "node bot-server.js --test"
+  },
+  "keywords": [
+    "slack",
+    "bot",
+    "claude",
+    "anthropic",
+    "ai",
+    "assistant"
+  ],
+  "author": "Legacy Wine & Liquor",
+  "license": "MIT",
+  "dependencies": {
+    "@slack/bolt": "^3.19.0",
+    "@anthropic-ai/sdk": "^0.20.0",
+    "express": "^4.18.2",
+    "dotenv": "^16.3.1",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
