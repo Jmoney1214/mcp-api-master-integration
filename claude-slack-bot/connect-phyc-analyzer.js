@@ -63,11 +63,15 @@ class PhycAnalyzerMCP {
         };
       }
 
-      const response = await lightspeedAPI.get('/Account.json');
+      // Test with a simple Sale query (limit 1) to verify API access
+      const response = await lightspeedAPI.get('/Sale.json', {
+        params: { limit: 1 }
+      });
+
       return {
         success: true,
         message: 'Connected to Lightspeed API',
-        accountName: response.data.Account.name
+        accountName: `Account ${LIGHTSPEED_ACCOUNT_ID}`
       };
     } catch (error) {
       return {
