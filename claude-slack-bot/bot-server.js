@@ -10,10 +10,10 @@ import { App } from '@slack/bolt';
 import Anthropic from '@anthropic-ai/sdk';
 import express from 'express';
 import dotenv from 'dotenv';
-import PhycAnalyzerMCP from '../05-phyc-analyzer-mcp/connect-phyc-analyzer.js';
+// import PhycAnalyzerMCP from './connect-phyc-analyzer.js';
 
-// Load environment
-dotenv.config({ path: '../configs/.env' });
+// Load environment (Render provides env vars directly)
+dotenv.config();
 
 // Configuration
 const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN;
@@ -27,8 +27,9 @@ const anthropic = new Anthropic({
   apiKey: ANTHROPIC_API_KEY
 });
 
-// Initialize Phyc Analyzer
-const phycAnalyzer = new PhycAnalyzerMCP();
+// Initialize Phyc Analyzer (disabled for initial deployment)
+// const phycAnalyzer = new PhycAnalyzerMCP();
+const phycAnalyzer = null;
 
 // Initialize Slack Bot
 const app = new App({
@@ -123,6 +124,14 @@ function needsAnalytics(message) {
  */
 async function getAnalyticsData(message) {
   try {
+    // Analytics not available yet - Phyc Analyzer needs local filesystem access
+    if (!phycAnalyzer) {
+      return {
+        success: false,
+        message: "📊 Analytics integration coming soon! I'm currently running without access to the Phyc Analyzer data. For now, I can help with general questions and conversations."
+      };
+    }
+
     if (message.includes('today') || message.includes('sales today')) {
       return await phycAnalyzer.getTodaySales();
     }
@@ -327,11 +336,15 @@ expressApp.get('/health', (req, res) => {
     });
 
     // Test Phyc Analyzer connection
-    const testResult = await phycAnalyzer.testConnection();
-    if (testResult.success) {
-      console.log('✅ Phyc Analyzer MCP connected');
+    if (phycAnalyzer) {
+      const testResult = await phycAnalyzer.testConnection();
+      if (testResult.success) {
+        console.log('✅ Phyc Analyzer MCP connected');
+      } else {
+        console.warn('⚠️  Phyc Analyzer not available');
+      }
     } else {
-      console.warn('⚠️  Phyc Analyzer not available');
+      console.warn('⚠️  Phyc Analyzer disabled for cloud deployment');
     }
 
     console.log('\n🎉 Bot is ready! Mention @claude in Slack or DM me!');
