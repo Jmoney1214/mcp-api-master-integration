@@ -6,7 +6,8 @@
  * Deployed on Render with full MCP access
  */
 
-import { App } from '@slack/bolt';
+import slackBolt from '@slack/bolt';
+const { App } = slackBolt;
 import Anthropic from '@anthropic-ai/sdk';
 import express from 'express';
 import dotenv from 'dotenv';
