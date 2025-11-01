@@ -340,8 +340,10 @@ expressApp.get('/health', (req, res) => {
       const testResult = await phycAnalyzer.testConnection();
       if (testResult.success) {
         console.log('✅ Phyc Analyzer MCP connected');
+        console.log(`   Account: ${testResult.accountName}`);
       } else {
         console.warn('⚠️  Phyc Analyzer not available');
+        console.warn(`   Reason: ${testResult.error || testResult.message || 'Unknown error'}`);
       }
     } else {
       console.warn('⚠️  Phyc Analyzer disabled for cloud deployment');
